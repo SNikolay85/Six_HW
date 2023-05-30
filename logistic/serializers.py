@@ -1,29 +1,40 @@
 from rest_framework import serializers
-
+from .models import Product, Stock, StockProduct
 
 class ProductSerializer(serializers.ModelSerializer):
-    # настройте сериализатор для продукта
-    pass
+    class Meta:
+        model = Product
+        fields = ['id', 'title', 'description']
 
 
 class ProductPositionSerializer(serializers.ModelSerializer):
-    # настройте сериализатор для позиции продукта на складе
-    pass
+    model = StockProduct
+    fields = ['id', 'stock', 'product', 'quantity', 'price']
 
 
 class StockSerializer(serializers.ModelSerializer):
     positions = ProductPositionSerializer(many=True)
 
-    # настройте сериализатор для склада
+    class Meta:
+        model = Stock
+        fields = ['id', 'address', 'positions']
 
     def create(self, validated_data):
+        print(validated_data)
         # достаем связанные данные для других таблиц
         positions = validated_data.pop('positions')
+        print(positions)
 
         # создаем склад по его параметрам
         stock = super().create(validated_data)
 
-        # здесь вам надо заполнить связанные таблицы
+        # здесь вам надо заполнить связанные
+        for i in positions:
+            stock = serializers.IntegerField('stock')
+            product = serializers.IntegerField('product')
+            quantity = serializers.IntegerField('quantity')
+            price = serializers.FloatField('price')
+            print(i)
         # в нашем случае: таблицу StockProduct
         # с помощью списка positions
 

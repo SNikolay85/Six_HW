@@ -7,24 +7,44 @@ POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
-  "title": "Помидор",
+  "title": "Зелень",
   "description": "Лучшие помидоры на рынке"
 }
 
 ###
 
-# получение продуктов
+# получение всех продуктов
 GET {{baseUrl}}/products/
 Content-Type: application/json
 
 ###
 
+# получение продуктов по определенному полю
+GET {{baseUrl}}/products/?stock=1
+Content-Type: application/json
+
+
+###
+
+# поиск продуктов по значению поля
+GET {{baseUrl}}/products/?q='зелень'
+Content-Type: application/json
+
+
+###
+
+# упорядочивание продуктов по полям
+GET {{baseUrl}}/products/?o=-id,title
+Content-Type: application/json
+
+###
+
 # обновление продукта
-PATCH {{baseUrl}}/products/1/
+PATCH {{baseUrl}}/products/4/
 Content-Type: application/json
 
 {
-  "description": "Самые сочные и ароматные помидорки"
+  "description": "Самая свежая зелень"
 }
 
 ###
