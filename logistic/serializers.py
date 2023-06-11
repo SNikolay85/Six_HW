@@ -8,8 +8,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductPositionSerializer(serializers.ModelSerializer):
-    model = StockProduct
-    fields = ['product', 'quantity', 'price']
+    class Meta:
+        model = StockProduct
+        fields = ['product', 'quantity', 'price']
 
 
 class StockSerializer(serializers.ModelSerializer):
@@ -20,35 +21,28 @@ class StockSerializer(serializers.ModelSerializer):
         fields = ['address', 'positions']
 
     def create(self, validated_data):
-        print(validated_data)
-        # достаем связанные данные для других таблиц
         positions = validated_data.pop('positions')
-        print(positions)
-
-        # создаем склад по его параметрам
         stock = super().create(validated_data)
+        for product in positions:
+            StockProduct.objects.get_or_create(
+               stock=stock,
+               product=product['product'],
+               quantity=product['quantity'],
+               price=product['price']
+           )
 
-        # здесь вам надо заполнить связанные
-        for i in positions:
-            stock = serializers.IntegerField('stock')
-            product = serializers.IntegerField('product')
-            quantity = serializers.IntegerField('quantity')
-            price = serializers.FloatField('price')
-            print(i)
-        # в нашем случае: таблицу StockProduct
-        # с помощью списка positions
 
         return stock
 
     def update(self, instance, validated_data):
-        # достаем связанные данные для других таблиц
         positions = validated_data.pop('positions')
-
-        # обновляем склад по его параметрам
         stock = super().update(instance, validated_data)
-
-        # здесь вам надо обновить связанные таблицы
-        # в нашем случае: таблицу StockProduct
-        # с помощью списка positions
+        for product in positions:
+            StockProduct.objects.update_or_create(
+                stock=stock,
+                product=product['product'],
+                quantity=product['quantity'],
+                price=product['price']
+            )
 
         return stock

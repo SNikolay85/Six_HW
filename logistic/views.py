@@ -9,14 +9,16 @@ from logistic.serializers import ProductSerializer, StockSerializer
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    # filterset_fields = ['stock']
-    # search_fields = ['product']
-    # ordering_fields = ['id', 'title', 'description']
-    # при необходимости добавьте параметры фильтрации
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['title']
+    search_fields = ['description']
+    ordering_fields = ['id', 'title', 'description']
 
 
 class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    # при необходимости добавьте параметры фильтрации
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['address']
+    search_fields = ['products']
+    ordering_fields = ['id']
