@@ -7,8 +7,8 @@ POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
-  "title": "Огурец",
-  "description": "Лучшие огурцы"
+  "title": "product6",
+  "description": "best prod6"
 }
 
 ###
@@ -19,22 +19,28 @@ Content-Type: application/json
 
 ###
 
+# получение всех складов
+GET {{baseUrl}}/stocks/
+Content-Type: application/json
+
+###
+
 # получение продуктов по определенному полю
-GET {{baseUrl}}/products/?stock=1
+GET {{baseUrl}}/products/?title=Помидор
 Content-Type: application/json
 
 
 ###
 
 # поиск продуктов по значению поля
-GET {{baseUrl}}/products/?q='зелень'
+GET {{baseUrl}}/products/?q=самые
 Content-Type: application/json
 
 
 ###
 
 # упорядочивание продуктов по полям
-GET {{baseUrl}}/products/?o=-id,title
+GET {{baseUrl}}/products/?q=самые&o=-id,title
 Content-Type: application/json
 
 ###
@@ -44,19 +50,19 @@ PATCH {{baseUrl}}/products/4/
 Content-Type: application/json
 
 {
-  "description": "Самая свежая зелень"
+  "description": "свежая зелень"
 }
 
 ###
 
 # удаление продукта
-DELETE {{baseUrl}}/products/1/
+DELETE {{baseUrl}}/products/7/
 Content-Type: application/json
 
 ###
 
 # поиск продуктов по названию и описанию
-GET {{baseUrl}}/products/?search=помидор
+GET {{baseUrl}}/products/?q=огур
 Content-Type: application/json
 
 ###
@@ -66,7 +72,7 @@ POST {{baseUrl}}/stocks/
 Content-Type: application/json
 
 {
-  "address": "мой адрес не дом и не улица, мой адрес сегодня такой: www.ленинград-спб.ru3",
+  "address": "мrrrой адffс .ru3",
   "positions": [
     {
       "product": 2,
@@ -84,7 +90,7 @@ Content-Type: application/json
 ###
 
 # обновляем записи на складе
-PATCH {{baseUrl}}/stocks/4/
+PATCH {{baseUrl}}/stocks/5/
 Content-Type: application/json
 
 {
@@ -105,5 +111,13 @@ Content-Type: application/json
 ###
 
 # поиск складов, где есть определенный продукт
-GET {{baseUrl}}/stocks/?products=2
+GET {{baseUrl}}/stocks/?address=address 1
 Content-Type: application/json
+
+###
+
+# поиск складов, где есть определенный продукт
+GET {{baseUrl}}/stocks/?q=2
+Content-Type: application/json
+
+###
