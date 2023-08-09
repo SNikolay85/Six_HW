@@ -45,7 +45,7 @@ jobs:
       - name: Тесты
         run: python manage.py test
         env:
-          DEBUG: ${{ env. }}
+          DEBUG: ${{ env.DEBUG }}
           ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
           DB_NAME: ${{ env.DB_NAME }}
           DB_USER: ${{ env.DB_USER }}
