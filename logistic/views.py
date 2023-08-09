@@ -28,4 +28,4 @@ class StockViewSet(ModelViewSet):
 
 @api_view(['GET'])
 def test_page(request):
-    return Response('ow Hello world')
+    return Response('Test CICD success')
