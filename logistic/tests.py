@@ -8,4 +8,4 @@ class TestView(TestCase):
         client = APIClient()
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, 'Test CICD')
+        self.assertEqual(response.data, 'Test CICD new')
