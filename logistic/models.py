@@ -19,7 +19,7 @@ class Stock(models.Model):
     )
 
     def __str__(self):
-        return f'{self.address}'#, {self.stocks}'
+        return f'{self.address}'  # , {self.stocks}'
 
 
 class StockProduct(models.Model):

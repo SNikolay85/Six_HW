@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Product, Stock, StockProduct
 
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -29,9 +30,7 @@ class StockSerializer(serializers.ModelSerializer):
                product=product['product'],
                quantity=product['quantity'],
                price=product['price']
-           )
-
-
+            )
         return stock
 
     def update(self, instance, validated_data):
